@@ -9,7 +9,7 @@ if (isset($_SESSION['id_pelanggan'])) {
 
 // Jika login sebagai MUA, alihkan ke dashboard MUA
 if (isset($_SESSION['id_mua'])) {
-  header("Location: /mua_akses/mua_dashboard.php");
+  header("Location: mua_dashboard.php");
   exit();
 }
 ?>

@@ -28,6 +28,14 @@ $mua = $koneksi->query("SELECT * FROM mua");
         th, td { padding: 10px; border: 1px solid #ccc; text-align: left; }
         a.btn { padding: 6px 12px; background: #db7093; color: white; text-decoration: none; border-radius: 4px; }
         .btn-danger { background: #c0392b; }
+        @media (max-width: 768px) {
+        table {display: block;overflow-x: auto;white-space: nowrap;}
+        table th, table td {min-width: 120px;}
+        body {padding: 15px;}
+        h2 {font-size: 20px;}
+        a.btn {display: inline-block;margin: 5px 5px 10px 0;font-size: 14px;}
+}
+
     </style>
 </head>
 <body>

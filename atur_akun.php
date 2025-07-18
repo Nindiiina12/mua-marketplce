@@ -1,3 +1,54 @@
+<?php
+session_start();
+require 'koneksi.php'; // atau sesuaikan dengan koneksi kamu
+
+$id = $_SESSION['id_pelanggan']; // asumsinya sesi ini sudah dibuat saat login
+$pesan = '';
+
+// Ambil data pelanggan
+$query = $conn->query("SELECT * FROM pelanggan WHERE id_pelanggan = $id");
+$data = $query->fetch_assoc();
+
+// Update data
+if (isset($_POST['update'])) {
+    $nama = $koneksi->real_escape_string($_POST['nama']);
+    $email = $koneksi->real_escape_string($_POST['email']);
+    $no_telp = $koneksi->real_escape_string($_POST['no_telp']);
+    $alamat = $koneksi->real_escape_string($_POST['alamat']);
+
+    $koneksi->query("UPDATE pelanggan SET 
+        nama='$nama', email='$email', no_telp='$no_telp', alamat='$alamat' 
+        WHERE id_pelanggan=$id");
+    $pesan = "✅ Data berhasil diperbarui.";
+
+    // Refresh data
+    $data = $koneksi->query("SELECT * FROM pelanggan WHERE id_pelanggan = $id")->fetch_assoc();
+}
+
+// Ganti password
+if (isset($_POST['ganti_password'])) {
+    $pass1 = $_POST['password_baru'];
+    $pass2 = $_POST['konfirmasi_password'];
+
+    if ($pass1 === $pass2) {
+        $hashed = password_hash($pass1, PASSWORD_DEFAULT);
+        $koneksi->query("UPDATE pelanggan SET password='$hashed' WHERE id_pelanggan = $id");
+        $pesan = "🔐 Password berhasil diubah.";
+    } else {
+        $pesan = "❌ Password dan konfirmasi tidak cocok.";
+    }
+}
+
+// Hapus akun
+if (isset($_POST['hapus_akun'])) {
+    $koneksi->query("DELETE FROM pelanggan WHERE id_pelanggan = $id");
+    session_destroy();
+    header("Location: index.php"); // kembali ke halaman depan
+    exit();
+}
+?>
+
+
 <!DOCTYPE html>
 <html lang="id">
 <head>

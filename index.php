@@ -1,7 +1,7 @@
 <?php
 session_start();
 if (!isset($_SESSION['id_pelanggan'])) {
-    header("Location: /mua/login.php");
+    header("Location: login.php");
     exit();
 }
 
@@ -129,15 +129,17 @@ $result = $koneksi->query($sql);
     }
 
     .btn-book {
-        display: inline-block;
-        margin-top: 10px;
-        padding: 8px 15px;
+        display: block;
+        width: 100%;
+        box-sizing: border-box;
+        margin-top: 8px;
+        padding: 10px;
         background-color: #db7093;
         color: white;
         text-decoration: none;
         border-radius: 5px;
-        margin-right: 5px;
         font-size: 14px;
+        text-align: center;
     }
 
     .stars {
@@ -150,6 +152,48 @@ $result = $koneksi->query($sql);
         text-align: center;
         font-weight: bold;
     }
+    @media (max-width: 600px) {
+    header nav {
+        flex-direction: column;
+        align-items: center;
+        gap: 10px;
+    }
+
+    .container {
+        padding: 15px;
+        gap: 15px;
+    }
+
+    .mua-box {
+        width: 100%;
+        max-width: 100%;
+        box-sizing: border-box;
+    }
+
+    .btn-book {
+        display: inline-block;
+        width: 100%;
+        margin-top: 8px;
+        font-size: 15px;
+        text-align: center;
+    }
+
+    .toast {
+        width: 90%;
+        right: 5%;
+        left: 5%;
+        font-size: 14px;
+        padding: 12px;
+    }
+
+    p, h3 {
+        word-wrap: break-word;
+        overflow-wrap: break-word;
+    }
+}
+
+}
+
   </style>
 </head>
 <body>
